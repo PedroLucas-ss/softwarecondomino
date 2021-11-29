@@ -1,0 +1,163 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+namespace Prova__Raoni_
+{
+    public struct DadosMoradores
+    {
+        public string nome;
+        public double cpf;
+        public double telefone;
+        public string email;
+        public string apartamento;
+        public string qntdMoradores;
+        public string proprioOuAlugado;
+        public string pet;
+        public string id;
+    }
+    internal class Program
+    {
+        static string enderecoArquivo = @"C:\Users\Desenvolvedor\Desktop\TesteRaoni\ListaMorador.txt";
+        public static List<DadosMoradores> Morador = new List<DadosMoradores>();
+        static void Main(string[] args)
+        {
+            do
+            { Menu(); } while (Console.ReadKey().KeyChar != 's');
+            static void Menu()
+            {
+                Console.Clear();
+                Console.WriteLine("               ===================================\n");
+                Console.WriteLine("              Registro de Moradores do Condominio X\n");
+                Console.WriteLine("               ===================================\n");
+                Console.WriteLine("                      1. Cadastro        \n");
+                Console.WriteLine("                      2. Consulta        \n");
+                Console.WriteLine("                      3. Listar Moradores\n");
+                Console.WriteLine("                      4. Deletar         \n");
+                Console.WriteLine("                      5. Exportar        \n");
+                Console.WriteLine("                      s. Sair            \n");
+                Console.WriteLine("               ================================\n");
+                Console.Write("                      Digite uma opção: ");
+                switch (Console.ReadKey().KeyChar)
+                {
+                    case '1': Cadastro(); break;
+                    case '2': ConsultarInformacoes(); break;
+                    case '3': ListarInformacoes(); break;
+                    case '4': deletar(); break;
+                    case '5': exportar(); break;
+                    case 's': sair(); break;
+                    default: Console.Clear(); Console.WriteLine("Opção Invalida"); break;
+                }
+            }
+        }
+        static void Cadastro()
+        {
+            DadosMoradores p = new DadosMoradores();
+            Console.Clear();
+            Console.WriteLine("               ===================================");
+            Console.Write("\n           Informe ID do Morador(Caso seja o primeiro use 0): ");
+            p.id = Console.ReadLine();
+            Console.Write("\n                      Nome:");
+            p.nome = Console.ReadLine();
+            Console.Write("\n                      CPF:");
+            p.cpf = Double.Parse(Console.ReadLine());
+
+            if (p.cpf >= 01000000000 && p.cpf <= 99999999999)
+            {
+            }
+            else
+            {
+                Console.Write("CPF inválido, por favor corrija e redigite: ");
+                p.cpf = Double.Parse(Console.ReadLine());
+            }
+            Console.Write("\n                      Telefone:");
+            p.telefone = Double.Parse(Console.ReadLine());
+
+            if (p.telefone >= 967000000 && p.telefone <= 969999999) { }
+            if (p.telefone >= 971000000 && p.telefone <= 976999999) { }
+            if (p.telefone >= 979000000 && p.telefone <= 989999999) { }
+            if (p.telefone >= 991000000 && p.telefone <= 999999999) { }
+            else
+            {
+                Console.Write("Telefone inválido, por favor corrija e redigite: ");
+                p.telefone = Double.Parse(Console.ReadLine());
+            }
+           
+            Console.Write("\n                      E-mail: ");
+            p.email = Console.ReadLine();
+            Console.Write("\n                      Apartamento: ");
+            p.apartamento = Console.ReadLine();
+            Console.Write("\n                      Quantidade de Moradores: ");
+            p.qntdMoradores = Console.ReadLine();
+            Console.Write("\n                      Proprietário ou inquilino?: ");
+            p.proprioOuAlugado = Console.ReadLine();
+            Console.Write("\n                      Possui algum Pet?: ");
+            p.pet = Console.ReadLine();
+            Morador.Add(p);
+        }
+        static void ConsultarInformacoes()
+        {
+            Console.Clear();
+            Console.WriteLine("               ======================================================================\n");
+            Console.Write("                    Informe o numero do apartamento do morador que deseja buscar: ");
+            string scr = Console.ReadLine();
+            for (int i = 0; i < Morador.Count; i++)
+            {
+                if (Morador[i].nome != null && Morador[i].apartamento.ToLower().Contains(scr.ToLower()))
+                {
+                    ListarMoradores(i);
+                }
+            }
+            Console.Write("\n                            Pressione a tecla Enter para voltar ao menu.");
+        }
+        static void ListarInformacoes()
+        {
+            Console.Clear();
+            for (int i = 0; i < Morador.Count; i++)
+            {
+                ListarMoradores(i);
+            }
+            Console.Write("\n             Pressione a tecla Enter para voltar ao menu.");
+        }
+        static void ListarMoradores(int i)
+        {
+            Console.WriteLine("               ===================================\n");
+            Console.WriteLine($"               Código do Morador: {Morador[i].id}");
+            Console.WriteLine($"               Nome: {Morador[i].nome}");
+            Console.WriteLine($"               E-mail: {Morador[i].email}");
+            Console.WriteLine($"               CPF: {Morador[i].cpf}");
+            Console.WriteLine($"               Telefone: {Morador[i].telefone}");
+            Console.WriteLine($"               Apartamento: {Morador[i].apartamento}");
+            Console.WriteLine($"               Quantidade de Moradores: {Morador[i].qntdMoradores}");
+            Console.WriteLine($"               Proprietário ou inquilino?: {Morador[i].proprioOuAlugado}");
+            Console.WriteLine($"               Possui algum pet?: {Morador[i].pet}");
+            Console.WriteLine("               ===================================\n");
+        }
+        static void deletar()
+        {
+            int opcaoDel;
+            Console.WriteLine("               ===================================");
+            Console.WriteLine("                         Deletar Morador");
+            Console.WriteLine("               ===================================");
+            ListarInformacoes();
+            Console.Write("\n   Por favor, digite o código do morador que você deseja deletar: ");
+            opcaoDel = int.Parse(Console.ReadLine());
+            Morador.RemoveAt(opcaoDel);
+        }
+        static void exportar()
+        {
+            string[] exportar = new string[Morador.Count];
+            for (int i = 0; i < Morador.Count; i++)
+            {
+                exportar[i] = $"{Morador[i].id},{Morador[i].nome},{Morador[i].email},{Morador[i].cpf},{Morador[i].telefone},{Morador[i].apartamento},{Morador[i].qntdMoradores},{Morador[i].proprioOuAlugado},{Morador[i].pet}";
+            }
+            File.WriteAllLines(enderecoArquivo, exportar);
+            Console.WriteLine("Lista de Moradores Exportada com Sucesso!!");
+        }
+        static void sair()
+        {
+            Environment.Exit(1);
+        }
+
+    }
+}
+
