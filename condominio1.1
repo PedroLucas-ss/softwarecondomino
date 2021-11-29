@@ -21,6 +21,7 @@ namespace Prova__Raoni_
         public static List<DadosMoradores> Morador = new List<DadosMoradores>();
         static void Main(string[] args)
         {
+            CarregarMoradores();
             do
             { Menu(); } while (Console.ReadKey().KeyChar != 's');
             static void Menu()
