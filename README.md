@@ -6,5 +6,5 @@ Professor: Raoni
 Mathews Figueiroa de Sant’ana Matrícula 24009931  
 Pedro Lucas Da Silva Santos; Matrícula 24009983  
 Rafael da Costa Menezes; Matrícula 24010314  
-João Victor Lira Vieira; Matrícula 24009533
+João Victor Lira Vieira; Matrícula 24009533.
        
